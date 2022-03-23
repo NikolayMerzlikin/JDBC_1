@@ -10,7 +10,7 @@ import java.util.List;
 public class UserDaoJDBCImpl implements UserDao {
     private Statement statement;
     private PreparedStatement preparedStatement;
-    private final Connection connection = Util.getConnection("localhost", "db_kata", "root", "1234");
+    private final Connection connection = Util.getConnectionJDBC("localhost", "db_kata", "root", "1234");
 
     public UserDaoJDBCImpl() {
 
@@ -27,10 +27,10 @@ public class UserDaoJDBCImpl implements UserDao {
     }
 
     public void dropUsersTable() {
-        String queryOnCreate = "DROP TABLE IF EXISTS users ;";
+        String query = "DROP TABLE IF EXISTS users;";
         try {
             statement = connection.createStatement();
-            statement.execute(queryOnCreate);
+            statement.execute(query);
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -83,10 +83,10 @@ public class UserDaoJDBCImpl implements UserDao {
     }
 
     public void cleanUsersTable() {
-        String queryOnCreate = "TRUNCATE users;";
+        String query = "TRUNCATE users;";
         try {
             statement = connection.createStatement();
-            statement.execute(queryOnCreate);
+            statement.execute(query);
         } catch (SQLException e) {
             e.printStackTrace();
         }
